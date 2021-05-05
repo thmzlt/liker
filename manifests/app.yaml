@@ -50,3 +50,10 @@ spec:
           image: ghcr.io/thmzlt/liker:main
           ports:
             - containerPort: 8080
+          env:
+            - name: COLOR
+              value: lightblue
+            - name: PROMPT
+              value: "Do you like Kubernetes?"
+            - name: REDIS_URL
+              value: redis://redis-service
