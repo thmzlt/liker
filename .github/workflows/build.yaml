@@ -1,0 +1,27 @@
+name: Build
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "Gemfile*"
+      - "*.nix"
+      - "*.rb"
+  pull_request:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: cachix/install-nix-action@v13
+      - uses: nelonoel/branch-name@v1.0.1
+      - uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - run: nix-build --argstr name ghcr.io/$GITHUB_REPOSITORY --argstr tag $BRANCH_NAME
+      - run: docker load < result
+      - run: docker push ghcr.io/$GITHUB_REPOSITORY:$BRANCH_NAME

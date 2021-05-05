@@ -1,0 +1,32 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-service
+  namespace: ${appName}
+spec:
+  selector:
+    app: ${appName}-redis
+  ports:
+    - port: 6379
+      targetPort: 6379
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-deployment
+  namespace: ${appName}
+spec:
+  selector:
+    matchLabels:
+      app: ${appName}-redis
+  template:
+    metadata:
+      labels:
+        app: ${appName}-redis
+    spec:
+      containers:
+        - name: redis
+          image: redis
+          ports:
+            - containerPort: 6379

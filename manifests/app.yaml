@@ -1,0 +1,52 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-ingress
+  namespace: ${appName}
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+  - host: ${appSubdomain}.k8s.thmz.lt
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-service
+            port:
+              number: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-service
+  namespace: ${appName}
+spec:
+  selector:
+    app: ${appName}-app
+  ports:
+    - port: 80
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+  namespace: ${appName}
+spec:
+  selector:
+    matchLabels:
+      app: ${appName}-app
+  template:
+    metadata:
+      labels:
+        app: ${appName}-app
+    spec:
+      containers:
+        - name: app
+          image: ghcr.io/thmzlt/liker:main
+          ports:
+            - containerPort: 8080
