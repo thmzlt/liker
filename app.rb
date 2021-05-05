@@ -13,7 +13,7 @@ KEY_DOWN = PREFIX.tr(" ", "-") + "-down"
 
 KEY_UP = PREFIX.tr(" ", "-") + "-up"
 
-REDIS = Redis.new(host: ENV["REDIS_URL"] || "localhost")
+REDIS = Redis.new(url: ENV["REDIS_URL"] || "localhost")
 
 TEMPLATE = <<~HTML
 <html>
