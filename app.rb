@@ -23,6 +23,7 @@ TEMPLATE = <<~HTML
     <style>
       body {
         background-color: <%= color %>;
+        font-family: sans-serif;
       }
       form {
         display: inline;

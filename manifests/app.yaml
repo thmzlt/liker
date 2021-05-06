@@ -48,7 +48,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: ghcr.io/thmzlt/liker:main
+          image: ghcr.io/thmzlt/liker:review-font-sans
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
