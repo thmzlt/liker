@@ -10,6 +10,27 @@
     };
     version = "1.1.1";
   };
+  nio4r = {
+    groups = ["default"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "00fwz0qq7agd2xkdz02i8li236qvwhma3p0jdn5bdvc21b7ydzd5";
+      type = "gem";
+    };
+    version = "2.5.7";
+  };
+  puma = {
+    dependencies = ["nio4r"];
+    groups = ["default"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "0wiprd0v4mjqv5p1vqaidr9ci2xm08lcxdz1k50mb1b6nrw6r74k";
+      type = "gem";
+    };
+    version = "5.2.2";
+  };
   rack = {
     groups = ["default"];
     platforms = [];
