@@ -37,6 +37,7 @@ metadata:
   name: app-deployment
   namespace: ${appName}
 spec:
+  replicas: ${appReplicas:=1}
   selector:
     matchLabels:
       app: ${appName}-app
@@ -53,8 +54,8 @@ spec:
             - containerPort: 8080
           env:
             - name: COLOR
-              value: lightblue
+              value: ${color}
             - name: PROMPT
-              value: "Do you like Kubernetes?"
+              value: ${prompt}
             - name: REDIS_URL
               value: redis://redis-service
