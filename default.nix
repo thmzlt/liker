@@ -7,6 +7,7 @@ let
     name = "ruby-env";
     version = "0.0.0";
     gemdir = ./.;
+    ruby = pkgs.ruby_3_0;
   };
 
   package =
